@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "13bb0e3a-a8a5-4cbe-b758-80b16f1ffeca",
+		"name": "TASK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://jsonplaceholder.typicode.com/posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"verify status code is 201\",function(){pm.response.to.have.status(201)});\r",
+							"\r",
+							"pm.test(\"verify Created Successfully\",function(){\r",
+							"  var jsonresponse = pm.response.json();\r",
+							"  if (jsonresponse[0] == pm.environment.get(\"CreatedAddress\"))\r",
+							"  {\r",
+							"  return true;\r",
+							"  }\r",
+							"  return false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json; charset=UTF-8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"title\": \"foo\",\r\n\"body\": \"bar\",\r\n\"userId\": \"1\"}"
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://jsonplaceholder.typicode.com/posts/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
